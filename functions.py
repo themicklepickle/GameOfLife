@@ -5,7 +5,7 @@
 
 
 # import pygame module for graphical user interface
-import pygame
+import pygame 
 
 # pygame setup
 pygame.init()
