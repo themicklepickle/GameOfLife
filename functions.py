@@ -104,8 +104,8 @@ def input_grid(matrix_width, matrix_height):
 
 	# display instructions below grid
 	arial_40 = pygame.font.SysFont("Arial", 40)
-	text = arial_40.render(f"The Yellow cell is the currently selected. Press 1 for alive or 0 for dead.", True, (0, 0, 0))
-	win.blit(text, (screen_width / 2 - 470, screen_height - 60))
+	text = arial_40.render(f"The Yellow cell is currently selected. Press 1 for alive or 0 for dead.", True, (0, 0, 0))
+	win.blit(text, (screen_width / 2 - 450, screen_height - 60))
 
 	# draw a grid with all cells filled in with white
 	for row in range(len(temp_grid)):
