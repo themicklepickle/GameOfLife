@@ -37,11 +37,12 @@ determine whether each cell in the matrix is either alive or dead by pressing 1 
 The user can determine the number of generations to run the simulation for.
 
 #### Generation Progression
-The user can determine how the simulation will progress from one generation to the next.
+The user can determine how the simulation will progress from one generation to the next:
+* Automatic - The user can determine the time delay between automatically progressing generations.
+* Manual - The user can determine when to progress to the next generation by pressing the ENTER key.
 
-Automatic - The user can determine the time delay between automatically progressing generations.
-
-Manual - The user can determine when to progress to the next generation by pressing the ENTER key.
+## Visuals
+<a href="https://imgur.com/V5Pk2GH"><img src="https://i.imgur.com/V5Pk2GH.gif" title="source: imgur.com" /></a>
 
 ## Author
 * **Michael Xu**
