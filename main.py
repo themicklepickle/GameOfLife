@@ -30,6 +30,8 @@ if grid_type == 1:
     grid = input_grid(width, height)
 else:
     grid = ast.literal_eval(input("Existing grid (one line matrix): "))
+    width = len(grid[0])
+    height = len(grid)
     print("DONE. Please return to game window.")
 
 # write grid to history file for future reference
@@ -78,15 +80,7 @@ for generation in range(gens + 1):
                 pygame.quit()
 
     # update grid
-    old_grid = grid.copy()
-    for row in range(len(old_grid)):
-        old_row = old_grid[row].copy()
-        for col in range(len(old_row)):
-            if alive(old_grid, (col, row)):
-                old_row[col] = 1
-            else:
-                old_row[col] = 0
-        grid[row] = old_row
+    grid = new_grid(grid, height, width)
 
 # close pygame window
 pygame.quit()

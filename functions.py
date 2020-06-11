@@ -16,58 +16,35 @@ pygame.display.set_caption("Conway's Game of Life")
 screen_width, screen_height = pygame.display.get_surface().get_size()
 
 
-def alive(grid, coordinate):
-    """
-    Determines whether a cell is alive or not.
+def new_grid(grid, rows, cols):
 
-    Args:
-        grid (matrix): two dimensional list containing all cells.
-        coordinate (tuple): (x, y) coordinate of one cell.
+    counts = [[0 for j in range(cols)] for i in range(rows)]
 
-    Returns:
-        bool: True if the value of the cell is 1, False otherwise.
-
-    Example:
-        >>> alive([[0, 1, 1], [0, 0, 1], [1, 0, 1]], (1, 2))
-        True
-        >>> alive([[0, 1, 1], [0, 0, 1], [1, 0, 1]], (1, 1))
-        False
-    """
-
-    # make a copy of grid parameter to not change original grid
-    temp_grid = grid.copy()
-
-    # process coordinate
-    x, y = coordinate[0] + 1, coordinate[1] + 1
-
-    # add buffer around matrix to avoid IndexError when referencing cells around the edges
-    temp_grid.insert(0, [0] * len(temp_grid[0]))
-    temp_grid.append([0] * len(temp_grid[0]))
-    for i in range(len(temp_grid)):
-        row_ = temp_grid[i].copy()
-        row_.insert(0, 0)
-        row_.append(0)
-        temp_grid[i] = row_
-
-    # count number of alive neighbours
-    cell = temp_grid[y][x]
-    count = 0
-    for i in range(-1, 2):
-        for j in range(-1, 2):
-            if i == 0 and j == 0:
-                continue
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == 1:
+                for m in range(i - 1, i + 2):
+                    for n in range(j - 1, j + 2):
+                        if m != i or n != j:
+                            try:
+                                counts[m][n] += 1
+                            except IndexError:
+                                continue
+    
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == 1:
+                if counts[i][j] == 2 or counts[i][j] == 3:
+                    grid[i][j] = 1
+                else:
+                    grid[i][j] = 0
             else:
-                if temp_grid[y + i][x + j] == 1:
-                    count += 1
+                if counts[i][j] == 3:
+                    grid[i][j] = 1
+                else:
+                    grid[i][j] = 0
 
-    # return alive or dead according to conway's game of life rules
-    if cell == 0:
-        if count == 3:
-            return True
-    else:
-        if count == 2 or count == 3:
-            return True
-    return False
+    return grid
 
 
 def input_grid(matrix_width, matrix_height):
